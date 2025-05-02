@@ -7,171 +7,162 @@ using System.Threading.Tasks;
 
 namespace StaticList
 {
-    public class Lista
+    public class List
     {
-        private char[] elementos;
-        private int tamanho;
-        private int capacidade;
+        private char[] elements;
+        private int size;
+        private int capacity;
 
-        public Lista(int capacidade)
+        public List(int capacity)
         {
-            this.capacidade = capacidade;
-            elementos = new char[capacidade];
-            tamanho = 0;
+            this.capacity = capacity;
+            elements = new char[capacity];
+            size = 0;
         }
 
-        //inserir no fim
-        public void Inserir(char valor)
+        public void Insert(char value)
         {
-            if(tamanho == capacidade)
+            if (size == capacity)
             {
-                Console.WriteLine("lista cheia");
+                Console.WriteLine("list full");
                 return;
             }
-            elementos[tamanho] = valor;
-            tamanho++;
+            elements[size] = value;
+            size++;
         }
 
-        //inserir em posicao especifica
-        public void InserirNaPosicao(int posicao, char valor)
+        public void InsertAtPosition(int position, char value)
         {
-            if (tamanho == capacidade)
+            if (size == capacity)
             {
-                Console.WriteLine("lista cheia");
+                Console.WriteLine("list full");
                 return;
             }
-            if (posicao < 0 ||  posicao > tamanho)
+            if (position < 0 || position > size)
             {
-                Console.WriteLine("posicao invalida");
+                Console.WriteLine("invalid position");
             }
 
-            for (int i = tamanho; i > posicao; i--)
+            for (int i = size; i > position; i--)
             {
-                elementos[i] = elementos[i - 1];
-
+                elements[i] = elements[i - 1];
             }
-            elementos[posicao] = valor;
-            tamanho++;
+            elements[position] = value;
+            size++;
         }
 
-        //remover por posição
-        public void Remover(int posicao)
+        public void Remove(int position)
         {
-            if (posicao < 0 || posicao >= tamanho)
+            if (position < 0 || position >= size)
             {
-                Console.WriteLine("posicao invalida");
+                Console.WriteLine("invalid position");
             }
-            for (int i = posicao; i < tamanho - 1; i++)
+            for (int i = position; i < size - 1; i++)
             {
-                elementos[i] = elementos[i + 1];
+                elements[i] = elements[i + 1];
             }
-            tamanho--;
+            size--;
         }
 
-        //exibir elementos
-        public void Exibir()
+        public void Display()
         {
-            if (tamanho == 0)
+            if (size == 0)
             {
-                Console.WriteLine("vazio");
+                Console.WriteLine("empty");
                 return;
             }
-            Console.Write("lista: ");
-            for (int i = 0; i < tamanho; i++)
+            Console.Write("list: ");
+            for (int i = 0; i < size; i++)
             {
-                Console.Write(elementos[i] + " ");
+                Console.Write(elements[i] + " ");
             }
             Console.WriteLine();
         }
 
-        //retornar tamanho
         public int Size()
         {
-            return tamanho;
+            return size;
         }
 
-        //verifica se lista estaa vazia
         public bool Empty()
         {
-            return tamanho == 0;
+            return size == 0;
         }
 
-        //retornar elemento em posicao especifica
-        public char ElementoNaPosicao(int posicao)
+        public char ElementAtPosition(int position)
         {
-            if (posicao < 0 || posicao >= tamanho)
+            if (position < 0 || position >= size)
             {
-                Console.WriteLine("posicao invalida");
+                Console.WriteLine("invalid position");
                 return '\0';
             }
-            return elementos[posicao];
+            return elements[position];
         }
-
     }
 
-        internal class Program
+    internal class Program
     {
         static void Main(string[] args)
         {
-            Lista lista = new Lista(10);
-            int opcao;
-            char valor;
-            int posicao;
+            List list = new List(10);
+            int option;
+            char value;
+            int position;
 
             do
             {
-                Console.WriteLine("lista linear estatica");
-                Console.WriteLine("0 sair");
-                Console.WriteLine("1 inserir");
-                Console.WriteLine("2 inserir em posicao especifica");
-                Console.WriteLine("3 remover por posicao");
-                Console.WriteLine("4 tamanho");
-                Console.WriteLine("5 exibir lista");
-                Console.WriteLine("6 exibir item na posicao especifica");
-                Console.WriteLine("escolha 1 opcao");
-                opcao = int.Parse(Console.ReadLine());
+                Console.WriteLine("static linear list");
+                Console.WriteLine("0 exit");
+                Console.WriteLine("1 insert");
+                Console.WriteLine("2 insert at specific position");
+                Console.WriteLine("3 remove by position");
+                Console.WriteLine("4 size");
+                Console.WriteLine("5 display list");
+                Console.WriteLine("6 show item at specific position");
+                Console.WriteLine("choose an option");
+                option = int.Parse(Console.ReadLine());
 
-                switch (opcao)
+                switch (option)
                 {
                     case 0:
-                        Console.WriteLine("saindo");
+                        Console.WriteLine("exiting");
                         break;
                     case 1:
-                        Console.WriteLine("digite o valor");
-                        valor = Console.ReadKey().KeyChar;
+                        Console.WriteLine("enter value");
+                        value = Console.ReadKey().KeyChar;
                         Console.WriteLine();
-                        lista.Inserir(valor);
+                        list.Insert(value);
                         break;
                     case 2:
-                        Console.WriteLine("digite posicao");
-                        posicao = int.Parse(Console.ReadLine());
-                        Console.WriteLine("digite o valor");
-                        valor = Console.ReadKey().KeyChar;
+                        Console.WriteLine("enter position");
+                        position = int.Parse(Console.ReadLine());
+                        Console.WriteLine("enter value");
+                        value = Console.ReadKey().KeyChar;
                         Console.WriteLine();
-                        lista.InserirNaPosicao(posicao, valor);
+                        list.InsertAtPosition(position, value);
                         break;
                     case 3:
-                        Console.WriteLine("digite posicao para remover");
-                        posicao = int.Parse(Console.ReadLine());
-                        lista.Remover(posicao);
+                        Console.WriteLine("enter position to remove");
+                        position = int.Parse(Console.ReadLine());
+                        list.Remove(position);
                         break;
                     case 4:
-                        Console.WriteLine("tamanho atual: " + lista.Size());
+                        Console.WriteLine("current size: " + list.Size());
                         break;
                     case 5:
-                        lista.Exibir();
+                        list.Display();
                         break;
                     case 6:
-                        Console.WriteLine("digite posicao");
-                        posicao = int.Parse(Console.ReadLine());
-                        valor = lista.ElementoNaPosicao(posicao);
-                        Console.WriteLine("elemento: " + valor);
+                        Console.WriteLine("enter position");
+                        position = int.Parse(Console.ReadLine());
+                        value = list.ElementAtPosition(position);
+                        Console.WriteLine("element: " + value);
                         break;
                     default:
                         break;
                 }
             }
-            while (opcao != 0);
+            while (option != 0);
         }
     }
 }
