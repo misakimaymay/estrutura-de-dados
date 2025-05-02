@@ -4,82 +4,82 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pilha_2
+namespace StackApp
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Stack<char> pilha = new Stack<char>();
-            char opcao;
+            Stack<char> stack = new Stack<char>();
+            char option;
             do
             {
-                Console.WriteLine("escolha uma opcao:");
-                Console.WriteLine("1- inserir elem");
-                Console.WriteLine("2- remover elem");
-                Console.WriteLine("3- exibir elem");
-                Console.WriteLine("4- mostrar topo");
-                Console.WriteLine("5- mostrar tamanho");
-                Console.WriteLine("0- sair");
-                opcao = Console.ReadKey().KeyChar;
+                Console.WriteLine("Choose an option:");
+                Console.WriteLine("1 - Push element");
+                Console.WriteLine("2 - Pop element");
+                Console.WriteLine("3 - Display stack");
+                Console.WriteLine("4 - Show top element");
+                Console.WriteLine("5 - Show size");
+                Console.WriteLine("0 - Exit");
+                option = Console.ReadKey().KeyChar;
                 Console.WriteLine();
 
-                switch (opcao)
+                switch (option)
                 {
                     case '1':
-                        Console.WriteLine("Digite um caractere para empilhar: ");
-                        char caractere = Console.ReadKey().KeyChar;
+                        Console.WriteLine("Enter a character to push:");
+                        char character = Console.ReadKey().KeyChar;
                         Console.WriteLine();
-                        pilha.Push(caractere);
+                        stack.Push(character);
                         break;
                     case '2':
-                        if (pilha.Count > 0)
+                        if (stack.Count > 0)
                         {
-                            Console.WriteLine("Elemento removido: " + pilha.Pop());
+                            Console.WriteLine("Removed element: " + stack.Pop());
                         }
-
                         else
                         {
-                            Console.WriteLine("Pilha vazia! >:(");
+                            Console.WriteLine("Stack is empty!");
                         }
                         break;
                     case '3':
-                        if (pilha.Count == 0)
+                        if (stack.Count == 0)
                         {
-                            Console.WriteLine("Pilha vazia! >;(");
+                            Console.WriteLine("Stack is empty!");
                         }
                         else
                         {
-                            Console.WriteLine("Pilha: ");
-                            foreach (var item in pilha)
+                            Console.WriteLine("Stack:");
+                            foreach (var item in stack)
                             {
                                 Console.WriteLine(" " + item);
                             }
                         }
                         break;
                     case '4':
-                        if (pilha.Count > 0)
+                        if (stack.Count > 0)
                         {
-                            Console.WriteLine("Topo da pilha: " + pilha.Peek());
+                            Console.WriteLine("Top of stack: " + stack.Peek());
                         }
                         else
                         {
-                            Console.WriteLine("Pilha vazia! >:(");
+                            Console.WriteLine("Stack is empty!");
                         }
                         break;
                     case '5':
-                        Console.WriteLine("Tamanho da pilha: " + pilha.Count());
+                        Console.WriteLine("Stack size: " + stack.Count());
                         break;
                     case '0':
-                        Console.WriteLine("Saindo . . . ^^");
+                        Console.WriteLine("Exiting...");
                         break;
                     default:
-                        Console.WriteLine("Opção inválida! >:(");
+                        Console.WriteLine("Invalid option!");
                         break;
                 }
+
                 Console.WriteLine();
 
-            } while (opcao != 0);
+            } while (option != '0');
         }
     }
 }
