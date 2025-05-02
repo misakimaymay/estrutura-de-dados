@@ -4,132 +4,132 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fila
+namespace QueueApp
 {
-    class Fila
+    class Queue
     {
-        private char[] elementos;
-        private int inicio;
-        private int fim;
-        private int tamanho;
-        private int capacidade;
+        private char[] elements;
+        private int start;
+        private int end;
+        private int size;
+        private int capacity;
 
-        // Inicializa a fila com o tamanho indicado pelo usuário
-        public Fila(int capacidade)
+        public Queue(int capacity)
         {
-            this.capacidade = capacidade;
-            elementos = new char[capacidade];
-            inicio = 0;
-            fim = -1;
-            tamanho = 0;
+            this.capacity = capacity;
+            elements = new char[capacity];
+            start = 0;
+            end = -1;
+            size = 0;
         }
 
-        // Enfileirar
-        public void Enqueue(char caractere)
+        public void Enqueue(char character)
         {
-            if (tamanho == capacidade)
+            if (size == capacity)
             {
-                Console.WriteLine("Erro: a fila está cheia! ( ｡ •`ᴖ´• ｡)")
+                Console.WriteLine("Error: the queue is full!");
+                return;
             }
-            fim = (fim + 1) % capacidade;
-            elementos[fim] = caractere;
-            tamanho++;
+            end = (end + 1) % capacity;
+            elements[end] = character;
+            size++;
         }
-        // Desenfileirar
+
         public char Dequeue()
         {
             if (Empty())
             {
-                Console.WriteLine("A fila está vazia! ૮₍⇀‸↼‶₎ა");
+                Console.WriteLine("The queue is empty!");
+                return '\0';
             }
-            char valor = elementos[inicio];
-            inicio = (inicio + 1) % capacidade;
-            tamanho--;
-            return valor;
-        }
-        // Verificar se a fila está vazia
-        public bool Empty()
-        {
-            return tamanho == 0;
+            char value = elements[start];
+            start = (start + 1) % capacity;
+            size--;
+            return value;
         }
 
-        // Exibir elementos da fila
-        public void Exibir()
+        public bool Empty()
+        {
+            return size == 0;
+        }
+
+        public void Display()
         {
             if (Empty())
             {
-                Console.WriteLine("A fila está vazia! ૮₍⇀‸↼‶₎ა");
-                return
+                Console.WriteLine("The queue is empty!");
+                return;
             }
-            Console.Write("Fila: ");
-            for (int i = 0; i < tamanho; i++)
+            Console.Write("Queue: ");
+            for (int i = 0; i < size; i++)
             {
-                int index = (inicio + i) % capacidade;
-                Console.Write(elementos[index] + " ");
+                int index = (start + i) % capacity;
+                Console.Write(elements[index] + " ");
             }
             Console.WriteLine();
         }
 
         public int Size()
         {
-            return tamanho;
-        }
-        // Elemento de início da fila
-        public char Head()
-        {
-            return elementos[inicio];
+            return size;
         }
 
+        public char Head()
+        {
+            return elements[start];
+        }
     }
+
     internal class Program
     {
         static void Main()
         {
-            Fila fila = new Fila(10);
-            int opcao;
-            char valor;
+            Queue queue = new Queue(10);
+            int option;
+            char value;
 
             do
             {
-                Console.WriteLine("Escolha uma opção: ");
-                Console.WriteLine("0 . Sair");
-                Console.WriteLine("1 . Enfileirar");
+                Console.WriteLine("Choose an option: ");
+                Console.WriteLine("0 . Exit");
+                Console.WriteLine("1 . Enqueue");
                 Console.WriteLine("2 . Head");
-                Console.WriteLine("3 . Desenfileirar");
-                Console.WriteLine("4 . Tamanho da fila");
-                Console.WriteLine("5 . Exibir fila");
-                opcao = int.Parse(Console.ReadLine());
+                Console.WriteLine("3 . Dequeue");
+                Console.WriteLine("4 . Queue size");
+                Console.WriteLine("5 . Display queue");
+                option = int.Parse(Console.ReadLine());
 
-                switch (opcao)
+                switch (option)
                 {
                     case 0:
-                        Console.WriteLine(" ");
+                        Console.WriteLine("Exiting...");
                         break;
                     case 1:
-                        Console.WriteLine("Digite um valor a ser enfileirado: ");
-                        valor = Console.ReadKey().KeyChar;
-                        fila.Enqueue(valor);
+                        Console.WriteLine("Enter a value to enqueue: ");
+                        value = Console.ReadKey().KeyChar;
+                        Console.WriteLine();
+                        queue.Enqueue(value);
                         break;
                     case 2:
-                        valor = fila.Head();
-                        Console.WriteLine("Início da fila: " + valor);
+                        value = queue.Head();
+                        Console.WriteLine("Head of the queue: " + value);
                         break;
                     case 3:
-                        valor = fila.Dequeue();
-                        Console.WriteLine("Elemento desenfileirado: " + valor);
+                        value = queue.Dequeue();
+                        Console.WriteLine("Dequeued element: " + value);
                         break;
                     case 4:
-                        Console.WriteLine("Quantidade de elementos na fila: " + fila.Size());
+                        Console.WriteLine("Number of elements in the queue: " + queue.Size());
                         break;
                     case 5:
-                        fila.Exibir();
+                        queue.Display();
                         break;
                     default:
-                        Console.WriteLine("Opção inválida! >:(");
+                        Console.WriteLine("Invalid option!");
                         break;
                 }
 
-            } while (opcao != 0);
+            } while (option != 0);
         }
     }
 }
